@@ -10,15 +10,16 @@ body {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 h2 {
   text-align: center;
 }
-input, button {
+input,
+button {
   padding: 10px;
   margin: 5px 0;
-  width: 100%;
+  width: 25%;
   box-sizing: border-box;
 }
 button {

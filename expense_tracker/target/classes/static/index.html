@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expense Tracker</title>
-  <!-- Linking CSS file (converted from style.html to style.css) -->
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="script.js"></script>
 </head>
+
 <body>
   <div class="container">
     <h2>Expense Tracker</h2>
     <input type="text" id="expense-name" placeholder="Expense Name">
+    <input type="number" id="expense-amount" placeholer="Amount">
+    <button onclick="addExpense()" id="addExpense">Add Expense</button>
+
     <select id="expense-category">
       <option value="">--Select a Category--</option>
       <option value="Food">Food</option>
@@ -20,15 +26,13 @@
     </select>
     <input type="text" id="custom-category" placeholder="Or enter your own category">
 
-    <input type="number" id="expense-amount" placeholder="Amount">
-  <button onclick="addExpense()">Add Expense</button>
+    <div id="pieChart"></div>
+
+
     <ul id="expense-list"></ul>
     <div class="total">Total: $<span id="total">0</span></div>
   </div>
 
-  <!-- Linking JS file (converted from script.html to script.js) -->
-  <script src="script.js"></script>
 </body>
+
 </html>
-
-
