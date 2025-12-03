@@ -16,6 +16,7 @@ var layout = {
 function addExpense() {
   const name = document.getElementById("expense-name").value;
   const amount = parseFloat(document.getElementById("expense-amount").value);
+  const period = document.getElementById("timePeriod").value;
 
   if (name && !isNaN(amount) && amount > 0) {
     const li = document.createElement("li");
@@ -26,9 +27,9 @@ function addExpense() {
     if (category == "") {
       category = "Uncategorized";
     }
-    li.innerHTML = `<span>[${category}] ${name}: $${amount.toFixed(2)}</span> 
+    li.innerHTML = `<span> ${name}: $${amount.toFixed(2)} [${category}]</span> 
                     <button onclick="removeExpense(this, ${amount}, '${category}')">X</button>`;
-    document.getElementById("expense-list").appendChild(li);
+    document.getElementById(`expense-list-${period}`).appendChild(li);
 
     // Add to pie chart data
     data[0].values.push(amount); // <- use number
@@ -42,6 +43,12 @@ function addExpense() {
   } else {
     alert("Please enter a valid expense name and amount.");
   }
+}
+
+function handleTotals(element, amount){
+  const periodElement = document.getElementById(element);
+  const currentTotal = periodElement.value;
+  periodElement.innerHTML()=(currentTotal+=amount)
 }
 
 // removeExpense now also removes the value from the pie chart
@@ -61,3 +68,18 @@ function removeExpense(button, amount, category) {
   // redraw pie chart
   Plotly.newPlot("pieChart", data, layout);
 }
+
+//collapsing buttons
+const toggleBtn = document.querySelector(".toggle-btn");
+const container = document.querySelector(".collapsible-container");
+
+toggleBtn.addEventListener("click", () => {
+  if (container.style.display === "none") {
+    container.style.display = "block";
+    toggleBtn.textContent = "Hide Expense Tracker";
+  } else {
+    container.style.display = "none";
+    toggleBtn.textContent = "Show Expense Tracker";
+  }
+});
+
