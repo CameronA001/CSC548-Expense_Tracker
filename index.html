@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartSpend | Expense Tracker</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Plotly for charts -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">S</div>
+        <div class="brand-text">
+          <h1>SmartSpend</h1>
+          <p class="brand-subtitle">Track, visualize, and control your expenses</p>
+        </div>
+      </div>
+      <div class="total-pill">
+        Total Spent:&nbsp;<span id="total">$0</span>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- Left Column: Inputs & List -->
+      <section class="panel panel-left">
+        <h2 class="panel-title">Add an Expense</h2>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="expense-name">Expense Name</label>
+            <input
+              type="text"
+              id="expense-name"
+              placeholder="e.g. Coffee, Groceries, Uber ride"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="expense-amount">Amount</label>
+            <input
+              type="number"
+              id="expense-amount"
+              placeholder="e.g. 12.50"
+              min="0"
+              step="0.01"
+            />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="expense-category">Category</label>
+            <div class="category-row">
+              <select id="expense-category">
+                <option value="">-- Select a Category --</option>
+                <option value="Groceries">Groceries</option>
+                <option value="eatOut">Eating Out</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Utilities">Utilities</option>
+              </select>
+              <span class="category-or">or</span>
+              <input
+                type="text"
+                id="custom-category"
+                placeholder="Custom category"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="timePeriod">Time Period</label>
+            <select id="timePeriod">
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+
+          <div class="form-group align-end">
+            <button
+              type="button"
+              id="addExpense"
+              class="btn-primary"
+              onclick="addExpense()"
+            >
+              + Add Expense
+            </button>
+          </div>
+        </div>
+
+        <section class="expense-list-section">
+          <div class="section-header">
+            <h3>All Expenses</h3>
+          </div>
+          <ul id="expense-list" class="expense-list"></ul>
+        </section>
+
+        <section class="period-breakdown">
+          <div class="section-header section-header-inline">
+            <h3>Breakdown by Period</h3>
+            <button type="button" class="toggle-btn">
+              Show / Hide Daily
+            </button>
+          </div>
+
+          <div id="expense-list-daily" class="collapsible-container">
+            <!-- Daily expenses injected by JS -->
+          </div>
+
+          <div class="period-group">
+            <h4>Weekly</h4>
+            <div id="expense-list-weekly"></div>
+          </div>
+
+          <div class="period-group">
+            <h4>Monthly</h4>
+            <div id="expense-list-monthly"></div>
+          </div>
+
+          <div class="period-group">
+            <h4>Yearly</h4>
+            <div id="expense-list-yearly"></div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Right Column: Chart -->
+      <section class="panel panel-right">
+        <h2 class="panel-title">Spending Overview</h2>
+        <p class="panel-subtitle">
+          See how your expenses are distributed across categories.
+        </p>
+        <div id="pieChart" class="chart-container"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- App logic -->
+  <script src="script.js"></script>
+</body>
+
+</html>
