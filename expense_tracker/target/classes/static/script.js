@@ -9,21 +9,13 @@ var data = [
 ];
 
 var layout = {
-  paper_bgcolor: '#020617',
+  height: 400,
+  width: 500,
+  paper_bgcolor: '#020617', 
   plot_bgcolor: '#020617',
   font: { color: '#ffffff' },
-  margin: { t: 20, b: 20, l: 20, r: 20 }, // optional: reduce padding
-  autosize: true
+  padding: 
 };
-
-var config = {
-  responsive: true
-};
-
-        function updateSliderValue() {
-            const goal = parseFloat(slider.value);
-            document.getElementById('budgetGoal').value = goal;
-        }
 
 function addExpense() {
   const name = document.getElementById("expense-name").value;
@@ -51,7 +43,7 @@ function addExpense() {
     document.getElementById("total").innerText = total.toFixed(2);
 
     // redraw pie chart
-    Plotly.newPlot("pieChart", data, layout, config);
+    Plotly.newPlot("pieChart", data, layout);
   } else {
     alert("Please enter a valid expense name and amount.");
   }
@@ -78,7 +70,7 @@ function removeExpense(button, amount, category) {
   }
 
   // redraw pie chart
-  Plotly.newPlot("pieChart", data, layout, config);
+  Plotly.newPlot("pieChart", data, layout);
 }
 
 //collapsing buttons
