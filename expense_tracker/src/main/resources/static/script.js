@@ -13,6 +13,8 @@ var layout = {
   width: 500,
 };
 
+let savedExpenses = [];
+
 function addExpense() {
   const name = document.getElementById("expense-name").value;
   const amount = parseFloat(document.getElementById("expense-amount").value);
@@ -27,8 +29,9 @@ function addExpense() {
     if (category == "") {
       category = "Uncategorized";
     }
-    li.innerHTML = `<span> ${name}: $${amount.toFixed(2)} [${category}]</span> 
-                    <button onclick="removeExpense(this, ${amount}, '${category}')">X</button>`;
+    li.innerHTML = `<span> ${name}: $${amount.toFixed(2)} [${category}]</span>
+                    <button onclick="removeExpense(this, ${amount}, '${category}')">X</button>
+                    <button onclick="saveExpense('${name}', ${amount}, '${category}')">Save</button>`;
     document.getElementById(`expense-list-${period}`).appendChild(li);
 
     // Add to pie chart data
@@ -37,6 +40,12 @@ function addExpense() {
 
     total += amount;
     document.getElementById("total").innerText = total.toFixed(2);
+
+    document.getElementById("expense-name").value = "";
+    document.getElementById("expense-amount").value = "";
+    document.getElementById("expense-category").value = "";
+    document.getElementById("custom-category").value = "";
+    document.getElementById("savedExpenses").value = "";
 
     // redraw pie chart
     Plotly.newPlot("pieChart", data, layout);
@@ -82,4 +91,60 @@ toggleBtn.addEventListener("click", () => {
     toggleBtn.textContent = "Show Expense Tracker";
   }
 });
+
+function saveExpense(name, amount, category) {
+  savedExpenses.push({name, amount, category});
+  loadSavedExpenses();
+  alert("Expense saved!");
+}
+
+
+function loadSavedExpenses() {
+  const dropdown = document.getElementById("savedExpenses");
+  dropdown.innerHTML = `<option value="">--Select a Saved Expense--</option>`;
+
+
+  savedExpenses.forEach((item, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = `${item.category}: ${item.name} ($${item.amount})`;
+    dropdown.appendChild(option);
+  });
+
+
+  dropdown.onchange = function () {
+    let index = dropdown.value;
+    if(index === "") return;
+   
+    let item = savedExpenses[index];
+
+
+    document.getElementById("expense-name").value = item.name;
+    document.getElementById("expense-amount").value = item.amount;
+
+
+    document.getElementById("expense-category").value = item.category;
+
+
+    const categorySelect = document.getElementById("expense-category");
+
+
+    const builtInCategories = Array.from(categorySelect.options)
+      .map(option => option.value)
+      .filter(value => value !== ""); // ignore the "--Select--" option
+
+
+   
+    if (!builtInCategories.includes(item.category)) {
+  // Custom
+      document.getElementById("expense-category").value = "";
+      document.getElementById("custom-category").value = item.category;
+    }
+    else {
+  // Build-in
+      document.getElementById("custom-category").value = "";
+      document.getElementById("expense-category").value = item.category;
+    }
+  }
+}
 
