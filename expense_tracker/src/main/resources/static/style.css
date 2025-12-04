@@ -172,6 +172,10 @@ body {
   grid-column: 1 / -1;
 }
 
+.form-group.quarter-width {
+  width: 25%;
+}
+
 .form-group.align-end {
   align-items: flex-end;
 }
