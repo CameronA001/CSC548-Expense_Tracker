@@ -47,8 +47,9 @@
                     </div>
 
                     <div class="form-group full-width">
-                        <label for="budgetGoal">How much do you want to save?</label>
-                        <input type="number" id="budgetGoal" placeholder="0">
+                        <label for="savingsSlider">How much do you want to save? $<span
+                                id="sliderValue">0</span></label>
+                        <input type="range" id="savingsSlider" min="0" max="10000" step="100" value="0">
                     </div>
 
                     <div class="form-group full-width">
@@ -66,22 +67,19 @@
                         </select>
                     </div>
 
-                    <!-- Slider Example -->
                     <div class="form-group full-width">
-                        <label for="savingsSlider">Adjust Savings Goal: <span id="sliderValue">0</span></label>
-                        <input type="range" id="savingsSlider" min="0" max="10000" step="100" value="0">
-                    </div>
-
-                    <div class="form-group full-width">
-                        <button type="button" class="btn-primary" onclick="updateSliderValue()">Set Budget</button>
+                        <button type="button" class="btn-primary" id="setBudgetBtn">Set Budget</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Right panel: Chart -->
-            <div class="panel panel-right chart-container">
-                <h2 class="panel-title">Savings Chart</h2>
-                <div id="pieChart"></div>
+            <!-- Right panel: Budget Goals List -->
+            <div class="panel panel-right">
+                <h2 class="panel-title">Budget Goals</h2>
+                <div id="budgetGoalsList" class="expense-list-section">
+                    <p class="panel-subtitle" style="text-align: center; padding: 20px;">No budget goals yet. Create one
+                        to get started!</p>
+                </div>
             </div>
         </div>
     </div>
@@ -93,6 +91,11 @@
 
         slider.addEventListener('input', () => {
             sliderValue.innerText = slider.value;
+        });
+
+        // Set Budget button event listener
+        document.getElementById('setBudgetBtn').addEventListener('click', () => {
+            saveBudgetGoal();
         });
     </script>
 </body>
