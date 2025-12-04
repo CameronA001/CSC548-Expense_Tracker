@@ -196,4 +196,3 @@ function collapse(period, containerID) {
 
 //collapsing buttons
  
-

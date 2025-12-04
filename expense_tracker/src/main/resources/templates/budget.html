@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeter</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Budget Right!</h2>
+
+        <form action="/sendBudget">
+
+            <label for="name">What's Your Name?</label>
+            <input type="text" id="name">
+
+            <label for="budgetReason">What are you budgeting for?:</label>
+            <input type="text" id="budgetReason">
+
+
+            <label for="budgetGoal">How much do you want to save?</label>
+            <input type="text" id="budgetGoal">
+
+            <label for="time">When do you want to achieve this by?</label>
+            <input type="number" id="time">
+
+            <select name="timePeriod">
+                <option value="days">Days</option>
+                <option value="weeks">Weeks</option>
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+            </select>
+        </form>
+    </div>
+</body>
+
+</html>
