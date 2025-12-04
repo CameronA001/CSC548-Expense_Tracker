@@ -30,8 +30,8 @@ function addExpense() {
       category = "Uncategorized";
     }
     li.innerHTML = `<span> ${name}: $${amount.toFixed(2)} [${category}]</span>
-                    <button onclick="removeExpense(this, ${amount}, '${category}')">X</button>
-                    <button onclick="saveExpense('${name}', ${amount}, '${category}')">Save</button>`;
+                    <button type="button" class="btn-secondary" onclick="removeExpense(this, ${amount}, '${category}')">X</button>
+                    <button type="button" class="btn-secondary" onclick="saveExpense('${name}', ${amount}, '${category}')">Save</button>`;
     document.getElementById(`expense-list-${period}`).appendChild(li);
 
     // Add to pie chart data
